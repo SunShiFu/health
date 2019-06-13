@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.shiyanlou.lesson10.mapper.UserIndexMapper">
+	<select id="getById" parameterType="Integer" 
+	resultType="com.shiyanlou.lesson10.domain.UserIndex">
+		select id, 
+		index_type as indexType,
+		index_content as indexContent,
+		collect_date as collectDate
+ 		from user_index where user_id = #{userId};
+	</select>
+</mapper> 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.shiyanlou.lesson10.mapper.UserMapper">
+	<select id="getById" parameterType="Integer" resultType="com.shiyanlou.lesson10.domain.User">
+		select
+		id, name, gender, age, phone, phone, job, address, 
+		create_time as createTime
+ 		from user where id = #{id};
+	</select>
+	
+	<select id="getAll" resultType="com.shiyanlou.lesson10.domain.User">
+		select
+		id, name, gender, age, phone, phone, job, address,
+		create_time as createTime
+ 		from user
+	</select>
+	
+	<insert id="insert" parameterType="com.shiyanlou.lesson10.domain.User"
+	useGeneratedKeys="true" keyProperty="id">
+		insert into user(name, gender, age, phone, job, address, create_time) 
+		values(#{name}, #{gender}, #{age}, #{phone}, #{job}, #{address}, #{createTime});
+	</insert>
+	
+	<update id="update" parameterType="com.shiyanlou.lesson10.domain.User">
+		update user
+		<set>
+			<if test="name != null and name != ''">
+				name = #{name},
+			</if>
+			<if test="gender != null">
+				gender = #{gender},
+			</if>
+			<if test="age != null and age != 0">
+				age = #{age},
+			</if>
+			<if test="phone != null and phone != ''">
+				phone = #{phone},
+			</if>
+			<if test="job != null and job != 0">
+				job = #{job},
+			</if>
+			<if test="address != null and address != ''">
+				address = #{address}
+			</if>
+		</set>
+		where id = #{id};
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from user where id = #{id};
+	</delete>
+</mapper> 

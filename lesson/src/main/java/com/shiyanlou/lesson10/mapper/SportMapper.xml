@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.shiyanlou.lesson10.mapper.SportMapper">
+	<select id="getById" parameterType="Integer" resultType="com.shiyanlou.lesson10.domain.Sport">
+		select id, name, description, 
+		consume_energy as consumeEnergy
+		from sport where id = #{id};
+	</select>
+	
+	<select id="getByIdBreif" parameterType="Integer" resultType="com.shiyanlou.lesson10.domain.Sport">
+		select id, name,
+		consume_energy as consumeEnergy
+		from sport where id = #{id};
+	</select>
+	
+	<insert id="insert" parameterType="com.shiyanlou.lesson10.domain.Sport"
+	useGeneratedKeys="true" keyProperty="id">
+		insert into sport(name, description, consume_energy) 
+		values(#{name}, #{description}, #{consumeEnergy});
+	</insert>
+	
+	<select id="getAll" resultType="com.shiyanlou.lesson10.domain.Sport">
+		select id, name, description, 
+		consume_energy as consumeEnergy 
+		 from sport
+	</select>
+	
+	<update id="update" parameterType="com.shiyanlou.lesson10.domain.Sport">
+		update sport
+		<set>
+			<if test="name != null and name != ''">
+				name = #{name},
+			</if>
+			<if test="description != null and description != ''">
+				description = #{description},
+			</if>
+			<if test="consumeEnergy != null and consumeEnergy != ''">
+				consume_energy = #{consumeEnergy},
+			</if>
+		</set>
+		where id = #{id};
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from sport where id = #{id};
+	</delete>
+</mapper>

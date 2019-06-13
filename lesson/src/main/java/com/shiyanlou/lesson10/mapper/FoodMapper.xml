@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.shiyanlou.lesson10.mapper.FoodMapper">
+	<select id="getById" parameterType="Integer" resultType="com.shiyanlou.lesson10.domain.Food">
+		select id, name, description,
+		food_energy as foodEnergy
+		from food where id = #{id};
+	</select>
+	
+	<select id="getByIdBreif" parameterType="Integer" resultType="com.shiyanlou.lesson10.domain.Food">
+		select id, name,
+		food_energy as foodEnergy
+		from food where id = #{id};
+	</select>
+	
+	<insert id="insert" parameterType="com.shiyanlou.lesson10.domain.Food"
+	useGeneratedKeys="true" keyProperty="id">
+		insert into food(name, description, food_energy) 
+		values(#{name}, #{description}, #{foodEnergy});
+	</insert>
+	
+	<select id="getAll" resultType="com.shiyanlou.lesson10.domain.Food">
+		select id, name, description,
+		food_energy as foodEnergy
+		from food
+	</select>
+	
+	<update id="update" parameterType="com.shiyanlou.lesson10.domain.Food">
+		update food
+		<set>
+			<if test="name != null and name != ''">
+				name = #{name},
+			</if>
+			<if test="description != null and description != ''">
+				description = #{description},
+			</if>
+			<if test="foodEnergy != null and foodEnergy != ''">
+				food_energy = #{foodEnergy},
+			</if>
+		</set>
+		where id = #{id};
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from food where id = #{id};
+	</delete>
+</mapper>
