@@ -44,7 +44,7 @@
     "react": "^16.3.2",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.3.2",
-    "react-draft-wysiwyg": "^1.12.13",
+    "react-draft-wysiwyg": "^1.14.6",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "3.7.2",
